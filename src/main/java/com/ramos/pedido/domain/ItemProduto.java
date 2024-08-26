@@ -18,7 +18,7 @@ public class ItemProduto implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String idProduto;
+	private Integer idProduto;
     private Integer quantidade;
     private Double preco;
     

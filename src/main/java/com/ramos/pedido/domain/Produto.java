@@ -29,9 +29,9 @@ public class Produto implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String idProduto;
+	private Integer idProduto;
 	
-    private String idCliente;
+    private Integer idCliente;
     
     @JsonIgnore
 	@OneToMany(mappedBy = "produto")
