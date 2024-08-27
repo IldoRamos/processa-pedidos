@@ -10,6 +10,7 @@ public class EnderecoRequest {
     private String cidade;
     private String cep;
     private String pais;
+    
 	public String getRua() {
 		return rua;
 	}

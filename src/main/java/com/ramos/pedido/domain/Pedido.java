@@ -6,35 +6,34 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ramos.pedido.domain.dto.ProdutoDTO;
+import com.ramos.pedido.domain.dto.PedidoDTO;
 import com.ramos.pedido.domain.enums.Status;
 
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
 
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-public class Produto implements Serializable{
+public class Pedido implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idProduto;
+	private Integer idPedido;
 	
     private Integer idCliente;
     
-    @JsonIgnore
-	@OneToMany(mappedBy = "produto")
-    private List<ItemProduto> itensProduto;
+    //@JsonIgnore
+	//@OneToMany(mappedBy = "produto")
+    @ElementCollection
+    @CollectionTable(name = "pedido_itens", joinColumns = @JoinColumn(name = "idPedido"))
+    private List<ItemPedido> itensProduto;
     
     private Double valorTotal;
     
@@ -46,29 +45,39 @@ public class Produto implements Serializable{
     @JsonFormat(pattern = "dd/MM/yyyy")	
 	private LocalDate dataCompra = LocalDate.now();
     
-    private Status status;
+    protected Status status;
     
-	public Produto(ProdutoDTO obj) {
+    
+	public Pedido() {
 		super();
-		this.idProduto = obj.getIdProduto();
+		addStatusPedido(Status.PENDENTE);
+	}
+
+	public Pedido(PedidoDTO obj) {
+		super();
+		this.idPedido = obj.getIdProduto();
 		this.idCliente = obj.getIdCliente();
 		this.itensProduto = obj.getItensProduto().stream().map(x->x).collect(Collectors.toList());
 		this.valorTotal = obj.getValorTotal();
 		this.metodoPagamento = obj.getMetodoPagamento();
 		this.enderecoRequest = obj.getEnderecoRequest();
 		this.dataCompra = obj.getDataCompra();
-		this.status = obj.getStatus();
+		addStatusPedido(obj.getStatus().PENDENTE);
 	}
 
+	private void addStatusPedido(Status status) {
+		this.status= status;
+	}
+	
 	public Integer getIdProduto() {
-		return idProduto;
+		return idPedido;
 	}
 
 	public Integer getIdCliente() {
 		return idCliente;
 	}
 
-	public List<ItemProduto> getItensProduto() {
+	public List<ItemPedido> getItensProduto() {
 		return itensProduto;
 	}
 
@@ -93,14 +102,14 @@ public class Produto implements Serializable{
 	}
 
 	public void setIdProduto(Integer idProduto) {
-		this.idProduto = idProduto;
+		this.idPedido = idProduto;
 	}
 
 	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
 	}
 
-	public void setItensProduto(List<ItemProduto> itensProduto) {
+	public void setItensProduto(List<ItemPedido> itensProduto) {
 		this.itensProduto = itensProduto.stream().map(x->x).collect(Collectors.toList());
 	}
 

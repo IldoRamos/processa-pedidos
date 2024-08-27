@@ -1,22 +1,31 @@
 package com.ramos.pedido.domain.dto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ramos.pedido.domain.EnderecoRequest;
-import com.ramos.pedido.domain.ItemProduto;
-import com.ramos.pedido.domain.Produto;
+import com.ramos.pedido.domain.ItemPedido;
+import com.ramos.pedido.domain.Pedido;
 import com.ramos.pedido.domain.enums.Status;
 
-public class ProdutoDTO {
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+public class PedidoDTO  implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
 	private Integer idProduto;
 	
     private Integer idCliente;
     
    
-    private List<ItemProduto> itensProduto;
+    private List<ItemPedido> itensProduto;
     
     private Double valorTotal;
     
@@ -28,12 +37,18 @@ public class ProdutoDTO {
 	private LocalDate dataCompra = LocalDate.now();
     
     private Status status;
+    
+    
 
-	public ProdutoDTO(Produto obj) {
+	public PedidoDTO() {
+		super();
+	}
+
+	public PedidoDTO(Pedido obj) {
 		super();
 		this.idProduto = obj.getIdProduto();
 		this.idCliente = obj.getIdCliente();
-		this.itensProduto = obj.getItensProduto().stream().map(x->x).collect(Collectors.toList());
+		this.itensProduto = obj.getItensProduto();
 		this.valorTotal = obj.getValorTotal();
 		this.metodoPagamento = obj.getMetodoPagamento();
 		this.enderecoRequest = obj.getEnderecoRequest();
@@ -49,7 +64,7 @@ public class ProdutoDTO {
 		return idCliente;
 	}
 
-	public List<ItemProduto> getItensProduto() {
+	public List<ItemPedido> getItensProduto() {
 		return itensProduto;
 	}
 
@@ -81,7 +96,7 @@ public class ProdutoDTO {
 		this.idCliente = idCliente;
 	}
 
-	public void setItensProduto(List<ItemProduto> itensProduto) {
+	public void setItensProduto(List<ItemPedido> itensProduto) {
 		this.itensProduto = itensProduto;
 	}
 
