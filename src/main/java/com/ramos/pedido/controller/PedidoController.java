@@ -53,7 +53,7 @@ public class PedidoController {
 				obj.getIdPedido(), obj.getValorTotal(), obj.getMetodoPagamento());
 		
 		ResponseEntity<PagamentoResponse> response = restTemplate.postForEntity(
-			    "http://payment-gateway-url/payment", pagamentoRequest, PagamentoResponse.class);
+			    "http://localhost:3000/pedido", pagamentoRequest, PagamentoResponse.class);
 		return response;
 		
 	}

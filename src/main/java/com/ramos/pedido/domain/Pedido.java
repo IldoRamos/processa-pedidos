@@ -62,7 +62,8 @@ public class Pedido implements Serializable{
 		this.metodoPagamento = obj.getMetodoPagamento();
 		this.enderecoRequest = obj.getEnderecoRequest();
 		this.dataCompra = obj.getDataCompra();
-		addStatusPedido(obj.getStatus().PENDENTE);
+		this.status = obj.getStatus();
+		//addStatusPedido(obj.getStatus().PENDENTE);
 	}
 
 	private void addStatusPedido(Status status) {
