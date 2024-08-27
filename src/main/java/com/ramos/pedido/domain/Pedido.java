@@ -33,7 +33,7 @@ public class Pedido implements Serializable{
 	//@OneToMany(mappedBy = "produto")
     @ElementCollection
     @CollectionTable(name = "pedido_itens", joinColumns = @JoinColumn(name = "idPedido"))
-    private List<ItemPedido> itensProduto;
+    private List<ItemPedido> itensPedido;
     
     private Double valorTotal;
     
@@ -55,9 +55,9 @@ public class Pedido implements Serializable{
 
 	public Pedido(PedidoDTO obj) {
 		super();
-		this.idPedido = obj.getIdProduto();
+		this.idPedido = obj.getIdPedido();
 		this.idCliente = obj.getIdCliente();
-		this.itensProduto = obj.getItensProduto().stream().map(x->x).collect(Collectors.toList());
+		this.itensPedido = obj.getItensProduto().stream().map(x->x).collect(Collectors.toList());
 		this.valorTotal = obj.getValorTotal();
 		this.metodoPagamento = obj.getMetodoPagamento();
 		this.enderecoRequest = obj.getEnderecoRequest();
@@ -69,7 +69,7 @@ public class Pedido implements Serializable{
 		this.status= status;
 	}
 	
-	public Integer getIdProduto() {
+	public Integer getIdPedido() {
 		return idPedido;
 	}
 
@@ -77,8 +77,8 @@ public class Pedido implements Serializable{
 		return idCliente;
 	}
 
-	public List<ItemPedido> getItensProduto() {
-		return itensProduto;
+	public List<ItemPedido> getItensPedido() {
+		return itensPedido;
 	}
 
 	public Double getValorTotal() {
@@ -101,7 +101,7 @@ public class Pedido implements Serializable{
 		return status;
 	}
 
-	public void setIdProduto(Integer idProduto) {
+	public void setIdPedido(Integer idProduto) {
 		this.idPedido = idProduto;
 	}
 
@@ -109,8 +109,8 @@ public class Pedido implements Serializable{
 		this.idCliente = idCliente;
 	}
 
-	public void setItensProduto(List<ItemPedido> itensProduto) {
-		this.itensProduto = itensProduto.stream().map(x->x).collect(Collectors.toList());
+	public void setItensPedido(List<ItemPedido> itensProduto) {
+		this.itensPedido = itensProduto.stream().map(x->x).collect(Collectors.toList());
 	}
 
 	public void setValorTotal(Double valorTotal) {

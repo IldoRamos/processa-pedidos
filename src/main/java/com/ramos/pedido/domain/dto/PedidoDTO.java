@@ -20,7 +20,7 @@ public class PedidoDTO  implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer idProduto;
+	private Integer idPedido;
 	
     private Integer idCliente;
     
@@ -46,9 +46,9 @@ public class PedidoDTO  implements Serializable{
 
 	public PedidoDTO(Pedido obj) {
 		super();
-		this.idProduto = obj.getIdProduto();
+		this.idPedido = obj.getIdPedido();
 		this.idCliente = obj.getIdCliente();
-		this.itensProduto = obj.getItensProduto();
+		this.itensProduto = obj.getItensPedido();
 		this.valorTotal = obj.getValorTotal();
 		this.metodoPagamento = obj.getMetodoPagamento();
 		this.enderecoRequest = obj.getEnderecoRequest();
@@ -56,8 +56,8 @@ public class PedidoDTO  implements Serializable{
 		this.status = obj.getStatus();
 	}
 
-	public Integer getIdProduto() {
-		return idProduto;
+	public Integer getIdPedido() {
+		return idPedido;
 	}
 
 	public Integer getIdCliente() {
@@ -88,15 +88,15 @@ public class PedidoDTO  implements Serializable{
 		return status;
 	}
 
-	public void setIdProduto(Integer idProduto) {
-		this.idProduto = idProduto;
+	public void setIdPedido(Integer idProduto) {
+		this.idPedido = idProduto;
 	}
 
 	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
 	}
 
-	public void setItensProduto(List<ItemPedido> itensProduto) {
+	public void setItensPedido(List<ItemPedido> itensProduto) {
 		this.itensProduto = itensProduto;
 	}
 
@@ -122,7 +122,7 @@ public class PedidoDTO  implements Serializable{
 
 	@Override
 	public String toString() {
-		return "ProdutoDTO [idProduto=" + idProduto + ", idCliente=" + idCliente + ", itensProduto=" + itensProduto
+		return "ProdutoDTO [idProduto=" + idPedido + ", idCliente=" + idCliente + ", itensProduto=" + itensProduto
 				+ ", valorTotal=" + valorTotal + ", metodoPagamento=" + metodoPagamento + ", enderecoRequest="
 				+ enderecoRequest + ", dataCompra=" + dataCompra + ", status=" + status + "]";
 	}
